@@ -1,7 +1,9 @@
+import MultiStepForm from "./MultiStepForm";
+
 const App = () => {
   return(
     <>
-    
+    <MultiStepForm/>
     </>
   )
 }

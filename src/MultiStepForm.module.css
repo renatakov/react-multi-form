@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-family: 'Ubuntu', sans-serif;
+    --primary-marine-blue: hsl(213, 96%, 18%);
+    --primary-purplish-blue: hsl(243, 100%, 62%);
+    --primary-pastel-blue:  hsl(228, 100%, 84%);
+    --primary-light-blue: hsl(206, 94%, 87%);
+    --primary-strawbery-red: hsl(354, 84%, 57%);
+    --neutral-cool-gray: hsl(231, 11%, 63%);
+    --neutral-light-gray: hsl(229, 24%, 87%);
+    --neutral-magnolia:  hsl(217, 100%, 97%);
+    --neutral-alabaster: hsl(231, 100%, 99%);
+    --neutral-white: hsl(0, 0%, 100%);
+}
+
+
+li{
+    list-style: none;
+}
+
+body{
+    background: var(--neutral-magnolia);
+}
+
+.multiStepSection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    background: var(--neutral-alabaster);
+    border-radius: 10px;
+    margin: 1rem auto;
+    padding:  1rem;
+
+}
+
+aside {
+    height: 80vh;
+    flex: 0 1 40%;
+    padding: 1rem;
+    background: url(/assets/images/bg-sidebar-desktop.svg) no-repeat;
+}
+
+.personalInfoForm p{
+color: var(--neutral-cool-gray);
+}
+
+.personalInfo{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+
+
+.personalInfo label{
+    color: var(--primary-marine-blue);
+}
+
+.personalInfo input{
+    width: 60%;
+    padding: 0.3rem 1rem;
+    font-weight: 600;
+    border: 2px solid var(--neutral-cool-gray);
+    border-radius: 5px;
+}
