@@ -10,17 +10,22 @@ const MultiStepForm = () => {
         console.log(e);
     }
     const stepDivs = useRef()
-    const inputStep1 = useRef()
+    const inputs= useRef();
     useEffect(() => {
-
+        
+        let stepsInputs  = inputs.current.querySelectorAll('li > input')
+        stepsInputs[0].checked = true;
+        console.log(stepsInputs);
         for (let i = 0; i < 4; i++) {
-            if (inputStep1.current.checked && inputStep1.current.value === stepDivs.current.children[i].dataset.step) {
+            if (stepsInputs[i].checked && stepsInputs[i].value === stepDivs.current.children[i].dataset.step) {
                 stepDivs.current.children[i].classList.add(`${s.currentStep}`);
-                console.dir(stepDivs.current.children[i]);
+                console.log(stepDivs.current.children[i]);
+            } else {
+                stepDivs.current.children[i].classList.remove(`${s.currentStep}`);
+                
             }
 
         }
-        console.dir(stepDivs.current);
 
 
     }, []);
@@ -28,9 +33,9 @@ const MultiStepForm = () => {
     return (
         <section className={s.multiStepSection}>
             <aside>
-                <ul className="steps">
+                <ul ref={inputs} className="steps">
                     <li className="step step1">
-                        <input ref={inputStep1} checked value={1} type="radio" name="step" id="step1" />
+                        <input value={1} type="radio" name="step" id="step1" />
                         STEP 1
                     </li>
                     <li className="step step2">
@@ -65,7 +70,7 @@ const MultiStepForm = () => {
                             <input id='inputTel' type='tel' name="tel" placeholder='e.g. +123456789'></input>
                         </div>
                     </div>
-                    <div data-step="2" className="selectPlanForm">
+                    <div data-step="2" className={s.selectPlanForm}>
                         <h3>Select Your Plan</h3>
                         <p>You have the option of mounthly or yearly billing</p>
                         <div className="plans">
@@ -86,8 +91,8 @@ const MultiStepForm = () => {
                             </div>
                         </div>
                     </div>
-                    <div data-step="3" className="addOnsForm"></div>
-                    <div data-step="4" className="summary">
+                    <div data-step="3" className={s.addOnsForm}></div>
+                    <div data-step="4" className={s.summary}>
                         <button type='submit'>Confirm</button>
                     </div>
                 </div>
