@@ -2,52 +2,43 @@ import s from './MultiStepForm.module.css';
 import arcade from './assets/images/icon-arcade.svg';
 import advanced from './assets/images/icon-advanced.svg';
 import pro from './assets/images/icon-pro.svg';
-import { useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 const MultiStepForm = () => {
+    const [currentStep, setCurrentStep] = useState('1')
     const formSubmit = (e) => {
         e.preventDefault();
         console.log(e);
     }
-    const stepDivs = useRef()
-    const inputs= useRef();
-    useEffect(() => {
-        
-        let stepsInputs  = inputs.current.querySelectorAll('li > input')
-        stepsInputs[0].checked = true;
-        console.log(stepsInputs);
-        for (let i = 0; i < 4; i++) {
-            if (stepsInputs[i].checked && stepsInputs[i].value === stepDivs.current.children[i].dataset.step) {
-                stepDivs.current.children[i].classList.add(`${s.currentStep}`);
-                console.log(stepDivs.current.children[i]);
-            } else {
-                stepDivs.current.children[i].classList.remove(`${s.currentStep}`);
-                
-            }
-
-        }
 
 
-    }, []);
+
 
     return (
         <section className={s.multiStepSection}>
             <aside>
-                <ul ref={inputs} className="steps">
+                <ul className="steps">
                     <li className="step step1">
-                        <input value={1} type="radio" name="step" id="step1" />
+                        <input required type="radio" name="step" id="step1" onChange={(e) => setCurrentStep('1')} />
+                        <span>1</span>
                         STEP 1
                     </li>
                     <li className="step step2">
-                        <input type="radio" value={2} name="step" id="step2" />
+                        <input required type="radio" name="step" id="step2" onChange={(e) => setCurrentStep('2')} />
+                        <span>2</span>
+
                         STEP 2
                     </li>
                     <li className="step step3">
-                        <input type="radio" value={3} name="step" id="step3" />
+                        <input required type="radio" name="step" id="step3" onChange={(e) => setCurrentStep('3')} />
+                        <span>3</span>
+
                         STEP 3
                     </li>
                     <li className="step step4">
-                        <input type="radio" value={4} name="step" id="step4" />
+                        <input required type="radio" name="step" id="step4" onChange={(e) => setCurrentStep('4')} />
+                        <span>4</span>
+
                         STEP 4
                     </li>
                 </ul>
@@ -55,9 +46,10 @@ const MultiStepForm = () => {
 
 
             <form onSubmit={formSubmit} className={s.multiStepForm}>
-                <div ref={stepDivs} className={s.stepDivs}>
-
-                    <div data-step="1" className={s.personalInfoForm}>
+                <div className={s.stepDivs}>
+                {currentStep === '1' ? 
+                    (
+                    <div className={s.personalInfoForm}>
                         <h3>Personal Info</h3>
                         <p>Please provide your name, email address and phone number</p>
                         <div className={s.personalInfo}>
@@ -70,29 +62,33 @@ const MultiStepForm = () => {
                             <input id='inputTel' type='tel' name="tel" placeholder='e.g. +123456789'></input>
                         </div>
                     </div>
-                    <div data-step="2" className={s.selectPlanForm}>
-                        <h3>Select Your Plan</h3>
-                        <p>You have the option of mounthly or yearly billing</p>
-                        <div className="plans">
-                            <div className="plan arcade">
-                                <img src={arcade} alt="" />
-                                <span>Arcade</span>
-                                <span>9$/mo</span>
-                            </div>
-                            <div className="plan advanced">
-                                <img src={advanced} alt="" />
-                                <span>Advanced</span>
-                                <span>12$/mo</span>
-                            </div>
-                            <div className="plan pro">
-                                <img src={pro} alt="" />
-                                <span>Pro</span>
-                                <span>15$/mo</span>
-                            </div>
+                        ) : null}
+                    {currentStep === '2' ? (
+                    <div className={s.selectPlanForm}>
+                    <h3>Select Your Plan</h3>
+                    <p>You have the option of mounthly or yearly billing</p>
+                    <div className="plans">
+                        <div className="plan arcade">
+                            <img src={arcade} alt="" />
+                            <span>Arcade</span>
+                            <span>9$/mo</span>
+                        </div>
+                        <div className="plan advanced">
+                            <img src={advanced} alt="" />
+                            <span>Advanced</span>
+                            <span>12$/mo</span>
+                        </div>
+                        <div className="plan pro">
+                            <img src={pro} alt="" />
+                            <span>Pro</span>
+                            <span>15$/mo</span>
                         </div>
                     </div>
-                    <div data-step="3" className={s.addOnsForm}></div>
-                    <div data-step="4" className={s.summary}>
+                </div>
+                    ) : null}
+
+                    <div  className={s.addOnsForm}></div>
+                    <div  className={s.summary}>
                         <button type='submit'>Confirm</button>
                     </div>
                 </div>
