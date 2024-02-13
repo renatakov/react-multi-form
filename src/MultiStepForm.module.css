@@ -74,6 +74,14 @@ aside ul li span{
     font-weight: 400;
 }
 
+aside ul li input:hover + span{
+    background-color: var(--primary-light-blue);
+    color: var(--primary-purplish-blue);
+    font-weight: 700;
+    border: none;
+}
+
+
 .personalInfoForm p {
     color: var(--neutral-cool-gray);
 }
@@ -81,7 +89,8 @@ aside ul li span{
 .personalInfo {
     display: flex;
     flex-direction: column;
-    row-gap: 1rem;
+    row-gap: .7rem;
+    margin-top: 1rem;
 }
 
 
@@ -93,12 +102,61 @@ aside ul li span{
     width: 60%;
     padding: 0.3rem 1rem;
     font-weight: 600;
-    border: 2px solid var(--neutral-cool-gray);
+    border: 1px solid var(--neutral-cool-gray);
     border-radius: 5px;
 }
 
-.personalInfo input:focus {
+.personalInfo input:hover, 
+.personalInfo input:focus{
+    cursor: pointer;
+
+}
+
+.personalInfo input:focus{
     border: none;
     outline: 1px solid var(--primary-purplish-blue);
 }
 
+.personalInfo input.invalid{
+    border: 1px solid var(--primary-strawbery-red);
+    outline: none;
+
+}
+
+
+
+.inputInfo{
+    display: flex;
+    justify-content: space-between;
+    font-size: 83%;
+
+}
+
+.inputInfo span{
+    color: var(--primary-strawbery-red);
+    font-weight: 700;
+}
+
+.switchStepsButtons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+
+.prevBtn,
+.nextBtn{
+    padding: .9rem;
+    font-weight: 700;
+
+}
+
+.prevBtn{
+    background: none;
+    color: var(--neutral-cool-gray);
+}
+
+.nextBtn{
+    background: var(--primary-marine-blue);
+    border-radius: 3px;
+    color: var(--neutral-magnolia);
+}
