@@ -17,6 +17,15 @@
     --neutral-white: hsl(0, 0%, 100%);
 }
 
+h2 {
+    color: var(--primary-marine-blue);
+
+}
+
+p {
+    font-size: 95%;
+    color: var(--neutral-cool-gray);
+}
 
 li {
     list-style: none;
@@ -47,10 +56,10 @@ aside {
 
 
 
-aside ul li:not(aside ul li span){
+aside ul li:not(aside ul li span) {
     color: var(--neutral-white);
     font-weight: 300;
-    padding-bottom: .5rem;
+    padding-bottom: .7rem;
 
 }
 
@@ -61,7 +70,7 @@ aside ul li input {
     left: 10%;
 }
 
-aside ul li span{
+aside ul li span {
     display: inline-block;
     width: 7%;
     background: transparent;
@@ -74,7 +83,7 @@ aside ul li span{
     font-weight: 400;
 }
 
-aside ul li input:hover + span{
+aside ul li input:hover+span {
     background-color: var(--primary-light-blue);
     color: var(--primary-purplish-blue);
     font-weight: 700;
@@ -82,8 +91,8 @@ aside ul li input:hover + span{
 }
 
 
-.personalInfoForm p {
-    color: var(--neutral-cool-gray);
+.stepDivs div {
+    transition: all 1s;
 }
 
 .personalInfo {
@@ -106,18 +115,18 @@ aside ul li input:hover + span{
     border-radius: 5px;
 }
 
-.personalInfo input:hover, 
-.personalInfo input:focus{
+.personalInfo input:hover,
+.personalInfo input:focus {
     cursor: pointer;
 
 }
 
-.personalInfo input:focus{
+.personalInfo input:focus {
     border: none;
     outline: 1px solid var(--primary-purplish-blue);
 }
 
-.personalInfo input.invalid{
+.personalInfo input.invalid {
     border: 1px solid var(--primary-strawbery-red);
     outline: none;
 
@@ -125,37 +134,50 @@ aside ul li input:hover + span{
 
 
 
-.inputInfo{
+.inputInfo {
     display: flex;
     justify-content: space-between;
     font-size: 83%;
 
 }
 
-.inputInfo span{
+.inputInfo span {
     color: var(--primary-strawbery-red);
     font-weight: 700;
 }
 
-.switchStepsButtons{
+.plans{
     display: flex;
     justify-content: space-between;
-    margin-top: 3rem;
+}
+
+.plan{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+
+.switchStepsButtons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .prevBtn,
-.nextBtn{
+.nextBtn {
     padding: .9rem;
     font-weight: 700;
 
 }
 
-.prevBtn{
+.prevBtn {
     background: none;
     color: var(--neutral-cool-gray);
 }
 
-.nextBtn{
+.nextBtn {
     background: var(--primary-marine-blue);
     border-radius: 3px;
     color: var(--neutral-magnolia);

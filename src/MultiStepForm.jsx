@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 
 const MultiStepForm = () => {
     const [currentStep, setCurrentStep] = useState(1);
+    const [subscribePlan, setSubscribePlan] = useState('');
     const [userInfo, setUserInfo] = useState();
     const nextBtnRef = useRef();
     const prevBtnRef = useRef();
@@ -16,11 +17,9 @@ const MultiStepForm = () => {
     };
     useEffect(() => {
         nextBtnRef.current.addEventListener('click', () => {
+            if (currentStep < 4) {
             setCurrentStep(currentStep + 1);
-            console.log(currentStep);
-
-            if (currentStep >= 4) {
-                setCurrentStep(1)
+                
             }
         })
         prevBtnRef.current.addEventListener('click', () => {
@@ -64,7 +63,7 @@ const MultiStepForm = () => {
                     {currentStep === 1 ?
                         (
                             <div className={s.personalInfoForm}>
-                                <h3>Personal Info</h3>
+                                <h2>Personal Info</h2>
                                 <p>Please provide your name, email address and phone number</p>
                                 <div className={s.personalInfo}>
                                     <div className={s.inputInfo}>
@@ -88,24 +87,30 @@ const MultiStepForm = () => {
                         ) : null}
                     {currentStep === 2 ? (
                         <div className={s.selectPlanForm}>
-                            <h3>Select Your Plan</h3>
+                            <h2>Select Your Plan</h2>
                             <p>You have the option of mounthly or yearly billing</p>
-                            <div className="plans">
-                                <div className="plan arcade">
+                            <div className={s.plans}>
+                                <div className={s.plan}>
                                     <img src={arcade} alt="" />
                                     <span>Arcade</span>
                                     <span>9$/mo</span>
                                 </div>
-                                <div className="plan advanced">
+                                <div className={s.plan}>
                                     <img src={advanced} alt="" />
                                     <span>Advanced</span>
                                     <span>12$/mo</span>
                                 </div>
-                                <div className="plan pro">
+                                <div className={s.plan}>
                                     <img src={pro} alt="" />
                                     <span>Pro</span>
                                     <span>15$/mo</span>
                                 </div>
+                            </div>
+                            <div className="planTypes">
+                                <label htmlFor="">Mounthly</label>
+                                <input type="radio" name="plan" value="mounthly" onChange={(e)=>setSubscribePlan(e.target.value)}/>
+                                <input type="radio" name="plan" value="yearly" onChange={(e)=>setSubscribePlan(e.target.value)}/>
+                                <label htmlFor="">Yearly</label>
                             </div>
                         </div>
                     ) : null}
@@ -122,8 +127,13 @@ const MultiStepForm = () => {
                 </div>
 
                 <div className={s.switchStepsButtons}>
-                    
+                    {currentStep === 1 ? (
+
+                        <button style={{opacity: 0}}  ref={prevBtnRef} className={s.prevBtn}>Go Back</button>
+                    ) : (
                     <button ref={prevBtnRef} className={s.prevBtn}>Go Back</button>
+
+                    )}
                     <button ref={nextBtnRef} className={s.nextBtn}>Next Step</button>
                 </div>
             </form>
