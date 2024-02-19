@@ -83,7 +83,7 @@ aside ul li span {
     font-weight: 400;
 }
 
-aside ul li input:hover+span {
+aside ul li input.currentStep+span {
     background-color: var(--primary-light-blue);
     color: var(--primary-purplish-blue);
     font-weight: 700;
@@ -146,18 +146,60 @@ aside ul li input:hover+span {
     font-weight: 700;
 }
 
+.selectPlanForm{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
 .plans{
     display: flex;
     justify-content: space-between;
+    column-gap: .5rem;
 }
 
 .plan{
     display: flex;
     flex-direction: column;
-    
+    border: 1px solid var(--neutral-light-gray);
+    border-radius: 3px;
+    flex: 1 1 auto;
+    padding: .5rem;
+}
+
+.plan:hover{
+    border-color: var(--primary-purplish-blue);
 }
 
 
+
+.plan img{
+    width: min-content;
+    margin-bottom: 2.5rem;
+}
+
+.plan h4{
+    color: var(--primary-marine-blue);
+}
+
+.planTypes{
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    padding: .5rem;
+    align-self: center;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    background: var(--primary-pastel-blue);
+}
+
+.planTypes input{
+    opacity: 0;
+}
+
+.planTypes label{
+    font-size: 90%;
+}
 
 .switchStepsButtons {
     display: flex;

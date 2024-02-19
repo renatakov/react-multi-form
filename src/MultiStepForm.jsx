@@ -34,24 +34,25 @@ const MultiStepForm = () => {
             <aside>
                 <ul className="steps">
                     <li className="step step1">
-                        <input required type="radio" name="step" id="step1" onChange={(e) => setCurrentStep(1)} />
+                        
+                        <input className={currentStep === 1 ? `${s.currentStep}` : null} required type="radio" name="step" id="step1" onChange={(e) => setCurrentStep(1)} />
                         <span>1</span>
                         STEP 1
                     </li>
                     <li className="step step2">
-                        <input required type="radio" name="step" id="step2" onChange={(e) => setCurrentStep(2)} />
+                        <input className={currentStep === 2 ? `${s.currentStep}` : null} required type="radio" name="step" id="step2" onChange={(e) => setCurrentStep(2)} />
                         <span>2</span>
 
                         STEP 2
                     </li>
                     <li className="step step3">
-                        <input required type="radio" name="step" id="step3" onChange={(e) => setCurrentStep(3)} />
+                        <input className={currentStep === 3 ? `${s.currentStep}` : null} required type="radio" name="step" id="step3" onChange={(e) => setCurrentStep(3)} />
                         <span>3</span>
 
                         STEP 3
                     </li>
                     <li className="step step4">
-                        <input required type="radio" name="step" id="step4" onChange={(e) => setCurrentStep(4)} />
+                        <input className={currentStep === 4 ? `${s.currentStep}` : null} required type="radio" name="step" id="step4" onChange={(e) => setCurrentStep(4)} />
                         <span>4</span>
 
                         STEP 4
@@ -92,25 +93,25 @@ const MultiStepForm = () => {
                             <div className={s.plans}>
                                 <div className={s.plan}>
                                     <img src={arcade} alt="" />
-                                    <span>Arcade</span>
+                                    <h4>Arcade</h4>
                                     <span>9$/mo</span>
                                 </div>
                                 <div className={s.plan}>
                                     <img src={advanced} alt="" />
-                                    <span>Advanced</span>
+                                    <h4>Advanced</h4>
                                     <span>12$/mo</span>
                                 </div>
                                 <div className={s.plan}>
                                     <img src={pro} alt="" />
-                                    <span>Pro</span>
+                                    <h4>Pro</h4>
                                     <span>15$/mo</span>
                                 </div>
                             </div>
-                            <div className="planTypes">
-                                <label htmlFor="">Mounthly</label>
+                            <div className={s.planTypes}>
+                                <label>Mounthly</label>
                                 <input type="radio" name="plan" value="mounthly" onChange={(e)=>setSubscribePlan(e.target.value)}/>
                                 <input type="radio" name="plan" value="yearly" onChange={(e)=>setSubscribePlan(e.target.value)}/>
-                                <label htmlFor="">Yearly</label>
+                                <label>Yearly</label>
                             </div>
                         </div>
                     ) : null}
