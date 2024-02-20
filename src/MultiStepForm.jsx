@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 
 const MultiStepForm = () => {
     const [currentStep, setCurrentStep] = useState(1);
-    const [subscribePlan, setSubscribePlan] = useState('');
+    const [subscribePlan, setSubscribePlan] = useState('mounthly');
     console.log(subscribePlan);
     const [userInfo, setUserInfo] = useState();
     const nextBtnRef = useRef();
@@ -118,16 +118,21 @@ const MultiStepForm = () => {
                                     <img src={arcade} alt="" />
                                     <h4>Arcade</h4>
                                     <span>90$/yr</span>
+                                    <span style={{fontSize: "83%"}}>2 mounths free</span>
+
                                 </div>
                                 <div className={s.plan}>
                                     <img src={advanced} alt="" />
                                     <h4>Advanced</h4>
                                     <span>120$/yr</span>
+                                    <span style={{fontSize: "83%"}}>2 mounths free</span>
+
                                 </div>
                                 <div className={s.plan}>
                                     <img src={pro} alt="" />
                                     <h4>Pro</h4>
                                     <span>150$/yr</span>
+                                    <span style={{fontSize: "83%"}}>2 mounths free</span>
                                 </div>
                             </div>
                                 )}

@@ -165,13 +165,12 @@ aside ul li input.currentStep+span {
     border-radius: 3px;
     flex: 1 1 auto;
     padding: .5rem;
+    row-gap: .3rem;
 }
 
 .plan:hover{
     border-color: var(--primary-purplish-blue);
 }
-
-
 
 .plan img{
     width: min-content;
