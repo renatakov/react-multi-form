@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 const MultiStepForm = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [subscribePlan, setSubscribePlan] = useState('');
+    console.log(subscribePlan);
     const [userInfo, setUserInfo] = useState();
     const nextBtnRef = useRef();
     const prevBtnRef = useRef();
@@ -18,13 +19,13 @@ const MultiStepForm = () => {
     useEffect(() => {
         nextBtnRef.current.addEventListener('click', () => {
             if (currentStep < 4) {
-            setCurrentStep(currentStep + 1);
-                
+                setCurrentStep(currentStep + 1);
+
             }
         })
         prevBtnRef.current.addEventListener('click', () => {
-            
-            if(currentStep > 1){
+
+            if (currentStep > 1) {
                 setCurrentStep(currentStep - 1)
             }
         });
@@ -34,7 +35,7 @@ const MultiStepForm = () => {
             <aside>
                 <ul className="steps">
                     <li className="step step1">
-                        
+
                         <input className={currentStep === 1 ? `${s.currentStep}` : null} required type="radio" name="step" id="step1" onChange={(e) => setCurrentStep(1)} />
                         <span>1</span>
                         STEP 1
@@ -90,7 +91,10 @@ const MultiStepForm = () => {
                         <div className={s.selectPlanForm}>
                             <h2>Select Your Plan</h2>
                             <p>You have the option of mounthly or yearly billing</p>
-                            <div className={s.plans}>
+                                {subscribePlan === "mounthly" ? (
+                                    
+                                    
+                                    <div className={s.plans}>
                                 <div className={s.plan}>
                                     <img src={arcade} alt="" />
                                     <h4>Arcade</h4>
@@ -107,10 +111,38 @@ const MultiStepForm = () => {
                                     <span>15$/mo</span>
                                 </div>
                             </div>
+
+                                ) : (
+                                    <div className={s.plans}>
+                                <div className={s.plan}>
+                                    <img src={arcade} alt="" />
+                                    <h4>Arcade</h4>
+                                    <span>90$/yr</span>
+                                </div>
+                                <div className={s.plan}>
+                                    <img src={advanced} alt="" />
+                                    <h4>Advanced</h4>
+                                    <span>120$/yr</span>
+                                </div>
+                                <div className={s.plan}>
+                                    <img src={pro} alt="" />
+                                    <h4>Pro</h4>
+                                    <span>150$/yr</span>
+                                </div>
+                            </div>
+                                )}
                             <div className={s.planTypes}>
                                 <label>Mounthly</label>
-                                <input type="radio" name="plan" value="mounthly" onChange={(e)=>setSubscribePlan(e.target.value)}/>
-                                <input type="radio" name="plan" value="yearly" onChange={(e)=>setSubscribePlan(e.target.value)}/>
+                                <div>
+                                    {subscribePlan === 'yearly' ? (
+                                    <input type="radio" name="plan" value="mounthly" onChange={(e) => setSubscribePlan(e.target.value)} />
+
+                                    ) : (
+                                    <input style={{backgroundColor: 'white'}} type="radio" name="plan" value="mounthly" onChange={(e) => setSubscribePlan(e.target.value)} />
+
+                                    )}
+                                    <input type="radio" name="plan" value="yearly" onChange={(e) => setSubscribePlan(e.target.value)} />
+                                </div>
                                 <label>Yearly</label>
                             </div>
                         </div>
@@ -121,18 +153,18 @@ const MultiStepForm = () => {
 
                     {currentStep === 4 ? (
 
-                    <div className={s.summary}>
-                        <button type='submit'>Confirm</button>
-                    </div>
-                    ):null}
+                        <div className={s.summary}>
+                            <button type='submit'>Confirm</button>
+                        </div>
+                    ) : null}
                 </div>
 
                 <div className={s.switchStepsButtons}>
                     {currentStep === 1 ? (
 
-                        <button style={{opacity: 0}}  ref={prevBtnRef} className={s.prevBtn}>Go Back</button>
+                        <button style={{ opacity: 0 }} ref={prevBtnRef} className={s.prevBtn}>Go Back</button>
                     ) : (
-                    <button ref={prevBtnRef} className={s.prevBtn}>Go Back</button>
+                        <button ref={prevBtnRef} className={s.prevBtn}>Go Back</button>
 
                     )}
                     <button ref={nextBtnRef} className={s.nextBtn}>Next Step</button>

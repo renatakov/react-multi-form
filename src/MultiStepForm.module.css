@@ -186,6 +186,7 @@ aside ul li input.currentStep+span {
     width: 95%;
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: .5rem;
     align-self: center;
     margin-bottom: 1rem;
@@ -193,12 +194,41 @@ aside ul li input.currentStep+span {
     background: var(--primary-pastel-blue);
 }
 
+.planTypes div{
+
+    padding: .25rem .125rem;
+}
+
 .planTypes input{
-    opacity: 0;
+    appearance: none;
+    font: inherit;
+    color: currentColor;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+}
+
+.planTypes input:checked{
+    background-color: #fff;
 }
 
 .planTypes label{
     font-size: 90%;
+}
+
+.planTypes div{
+    display: flex;
+    justify-content: center;
+    flex: 0 1 13%;
+    border-radius: 40px;
+    background-color:  var(--primary-marine-blue);
+    margin: 0 1rem;
+}
+
+.planTypes input:checked{
+    
+    opacity: 1;
+    accent-color: red;
 }
 
 .switchStepsButtons {
