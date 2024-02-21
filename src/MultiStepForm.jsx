@@ -91,59 +91,59 @@ const MultiStepForm = () => {
                         <div className={s.selectPlanForm}>
                             <h2>Select Your Plan</h2>
                             <p>You have the option of mounthly or yearly billing</p>
-                                {subscribePlan === "mounthly" ? (
-                                    
-                                    
-                                    <div className={s.plans}>
-                                <div className={s.plan}>
-                                    <img src={arcade} alt="" />
-                                    <h4>Arcade</h4>
-                                    <span>9$/mo</span>
-                                </div>
-                                <div className={s.plan}>
-                                    <img src={advanced} alt="" />
-                                    <h4>Advanced</h4>
-                                    <span>12$/mo</span>
-                                </div>
-                                <div className={s.plan}>
-                                    <img src={pro} alt="" />
-                                    <h4>Pro</h4>
-                                    <span>15$/mo</span>
-                                </div>
-                            </div>
+                            {subscribePlan === "mounthly" ? (
 
-                                ) : (
-                                    <div className={s.plans}>
-                                <div className={s.plan}>
-                                    <img src={arcade} alt="" />
-                                    <h4>Arcade</h4>
-                                    <span>90$/yr</span>
-                                    <span style={{fontSize: "83%"}}>2 mounths free</span>
 
+                                <div className={s.plans}>
+                                    <div className={s.plan}>
+                                        <img src={arcade} alt="" />
+                                        <h4>Arcade</h4>
+                                        <span>9$/mo</span>
+                                    </div>
+                                    <div className={s.plan}>
+                                        <img src={advanced} alt="" />
+                                        <h4>Advanced</h4>
+                                        <span>12$/mo</span>
+                                    </div>
+                                    <div className={s.plan}>
+                                        <img src={pro} alt="" />
+                                        <h4>Pro</h4>
+                                        <span>15$/mo</span>
+                                    </div>
                                 </div>
-                                <div className={s.plan}>
-                                    <img src={advanced} alt="" />
-                                    <h4>Advanced</h4>
-                                    <span>120$/yr</span>
-                                    <span style={{fontSize: "83%"}}>2 mounths free</span>
 
+                            ) : (
+                                <div className={s.plans}>
+                                    <div className={s.plan}>
+                                        <img src={arcade} alt="" />
+                                        <h4>Arcade</h4>
+                                        <span>90$/yr</span>
+                                        <span style={{ fontSize: "83%" }}>2 mounths free</span>
+
+                                    </div>
+                                    <div className={s.plan}>
+                                        <img src={advanced} alt="" />
+                                        <h4>Advanced</h4>
+                                        <span>120$/yr</span>
+                                        <span style={{ fontSize: "83%" }}>2 mounths free</span>
+
+                                    </div>
+                                    <div className={s.plan}>
+                                        <img src={pro} alt="" />
+                                        <h4>Pro</h4>
+                                        <span>150$/yr</span>
+                                        <span style={{ fontSize: "83%" }}>2 mounths free</span>
+                                    </div>
                                 </div>
-                                <div className={s.plan}>
-                                    <img src={pro} alt="" />
-                                    <h4>Pro</h4>
-                                    <span>150$/yr</span>
-                                    <span style={{fontSize: "83%"}}>2 mounths free</span>
-                                </div>
-                            </div>
-                                )}
+                            )}
                             <div className={s.planTypes}>
                                 <label>Mounthly</label>
                                 <div>
                                     {subscribePlan === 'yearly' ? (
-                                    <input type="radio" name="plan" value="mounthly" onChange={(e) => setSubscribePlan(e.target.value)} />
+                                        <input type="radio" name="plan" value="mounthly" onChange={(e) => setSubscribePlan(e.target.value)} />
 
                                     ) : (
-                                    <input style={{backgroundColor: 'white'}} type="radio" name="plan" value="mounthly" onChange={(e) => setSubscribePlan(e.target.value)} />
+                                        <input style={{ backgroundColor: 'white' }} type="radio" name="plan" value="mounthly" onChange={(e) => setSubscribePlan(e.target.value)} />
 
                                     )}
                                     <input type="radio" name="plan" value="yearly" onChange={(e) => setSubscribePlan(e.target.value)} />
@@ -153,7 +153,67 @@ const MultiStepForm = () => {
                         </div>
                     ) : null}
                     {currentStep === 3 ? (
-                        <div className={s.addOnsForm}></div>
+                        <div className={s.addOnsForm}>
+                            <h2>Pick add-ons</h2>
+                            <p>Add-ons help enhance your gaming experience.</p>
+                            <div className={s.ons}>
+                                <div className={s.onsItem}>
+                                    
+
+                                    <input type="checkbox" name="" />
+                                    <span className={s.checkmark}></span>
+                                    
+
+                                    <div className={s.onsItemText}>
+
+                                        <label>Online service</label>
+                                        <p>Access to multiplayer games</p>
+                                    </div>
+                                    {subscribePlan === 'mounthly' ? (
+
+                                        <span>+1$/mo</span>
+                                    ) : (
+                                        <span>+10$/yr</span>
+
+                                    )}
+                                </div>
+                                <div className={s.onsItem}>
+                                    <input type="checkbox" name="" />
+                                    <span className={s.checkmark}></span>
+                                    <div className={s.onsItemText}>
+
+                                        <label>Larger storage</label>
+                                        <p>Extra 1 TB of cloud save</p>
+                                    </div>
+                                    {subscribePlan === "mounthly" ? (
+
+                                        <span>+2$/mo</span>
+                                    )
+                                        : (
+                                            <span>+20$/yr</span>
+
+                                        )}
+                                </div>
+                                <div className={s.onsItem}>
+                                    <input type="checkbox" name="" />
+                                    <span className={s.checkmark}></span>
+
+                                    <div className={s.onsItemText}>
+                                        <label>Customizable profile</label>
+                                        <p>Custom theme on your profile</p>
+
+                                    </div>
+                                    {subscribePlan === "mounthly" ? (
+
+                                        <span>+2$/mo</span>
+                                    )
+                                        : (
+                                            <span>+20$/yr</span>
+
+                                        )}
+                                </div>
+                            </div>
+                        </div>
                     ) : null}
 
                     {currentStep === 4 ? (
