@@ -8,15 +8,33 @@ import { useForm } from 'react-hook-form'
 const MultiStepForm = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [subscribePlan, setSubscribePlan] = useState('mounthly');
-    console.log(subscribePlan);
+    const [planDetails, setPlanDetails] = useState({
+        type: '',
+        price: ''
+    })
     const [userInfo, setUserInfo] = useState();
     const nextBtnRef = useRef();
     const prevBtnRef = useRef();
+    const plans = useRef();
+    const ons = useRef();
+    console.dir(ons.current);
     const { register, handleSubmit, formState: { errors } } = useForm({});
     const formSubmit = (e) => {
         setUserInfo(e)
     };
     useEffect(() => {
+        if(currentStep === 2){
+            let newPlansArr = [...plans.current.children]
+            newPlansArr.forEach((item) => {
+                item.onclick = () => {
+                    setPlanDetails({
+                        type: item.children[1].innerText,
+                        price: item.children[2].innerText
+                    });
+                };
+            });
+        }
+        
         nextBtnRef.current.addEventListener('click', () => {
             if (currentStep < 4) {
                 setCurrentStep(currentStep + 1);
@@ -30,6 +48,7 @@ const MultiStepForm = () => {
             }
         });
     }, [currentStep])
+
     return (
         <section className={s.multiStepSection}>
             <aside>
@@ -94,7 +113,7 @@ const MultiStepForm = () => {
                             {subscribePlan === "mounthly" ? (
 
 
-                                <div className={s.plans}>
+                                <div ref={plans} className={s.plans}>
                                     <div className={s.plan}>
                                         <img src={arcade} alt="" />
                                         <h4>Arcade</h4>
@@ -113,7 +132,7 @@ const MultiStepForm = () => {
                                 </div>
 
                             ) : (
-                                <div className={s.plans}>
+                                <div ref={plans} className={s.plans}>
                                     <div className={s.plan}>
                                         <img src={arcade} alt="" />
                                         <h4>Arcade</h4>
@@ -156,7 +175,7 @@ const MultiStepForm = () => {
                         <div className={s.addOnsForm}>
                             <h2>Pick add-ons</h2>
                             <p>Add-ons help enhance your gaming experience.</p>
-                            <div className={s.ons}>
+                            <div ref={ons} className={s.ons}>
                                 <div className={s.onsItem}>
                                     
 
@@ -219,7 +238,11 @@ const MultiStepForm = () => {
                     {currentStep === 4 ? (
 
                         <div className={s.summary}>
-                            <button type='submit'>Confirm</button>
+                            <h2>Finishing up</h2>
+                            <p>Double-check everything looks OK before confirming.</p>
+                            <div className={s.summaryBlock}>
+
+                            </div>
                         </div>
                     ) : null}
                 </div>
@@ -232,7 +255,13 @@ const MultiStepForm = () => {
                         <button ref={prevBtnRef} className={s.prevBtn}>Go Back</button>
 
                     )}
+                    {currentStep === 4 ? (
+                        <button type='submit' ref={nextBtnRef} className={s.confirmBtn}>Confirm</button>
+                    ):(
+                        
+                        
                     <button ref={nextBtnRef} className={s.nextBtn}>Next Step</button>
+                    )}
                 </div>
             </form>
 

@@ -270,18 +270,18 @@ aside ul li input.currentStep+span {
     flex: 1;
 }
 
-.checkmark{
+.checkmark {
     width: 1rem;
     height: 1rem;
     border: 1px solid var(--neutral-light-gray);
     border-radius: 5px;
 }
 
-.onsItem input:checked + span{
+.onsItem input:checked+span {
     background-color: var(--primary-purplish-blue);
 }
 
-.onsItem input:checked + span::before{
+.onsItem input:checked+span::before {
     content: '\2713';
     color: var(--neutral-alabaster);
     font-weight: 700;
@@ -298,9 +298,16 @@ aside ul li input.currentStep+span {
 }
 
 .prevBtn,
-.nextBtn {
+.nextBtn,
+.confirmBtn {
     padding: .9rem;
     font-weight: 700;
+
+}
+
+.nextBtn,
+.confirmBtn{
+    border-radius: 3px;
 
 }
 
@@ -311,6 +318,10 @@ aside ul li input.currentStep+span {
 
 .nextBtn {
     background: var(--primary-marine-blue);
-    border-radius: 3px;
     color: var(--neutral-magnolia);
+}
+
+.confirmBtn {
+    color: var(--neutral-magnolia);
+    background-color: var(--primary-purplish-blue);
 }
