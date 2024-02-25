@@ -12,20 +12,21 @@ const MultiStepForm = () => {
         type: '',
         price: ''
     })
+    const [ons, setOns] = useState([])
+    const onsDiv = useRef();
     const [userInfo, setUserInfo] = useState();
     const nextBtnRef = useRef();
     const prevBtnRef = useRef();
     const plans = useRef();
-    const ons = useRef();
-    console.dir(ons.current);
     const { register, handleSubmit, formState: { errors } } = useForm({});
     const formSubmit = (e) => {
         setUserInfo(e)
     };
     useEffect(() => {
-        if(currentStep === 2){
+        if (currentStep === 2) {
             let newPlansArr = [...plans.current.children]
             newPlansArr.forEach((item) => {
+
                 item.onclick = () => {
                     setPlanDetails({
                         type: item.children[1].innerText,
@@ -34,7 +35,27 @@ const MultiStepForm = () => {
                 };
             });
         }
-        
+        if (currentStep === 3) {
+            let newOnsArr = [...onsDiv.current.children]
+            newOnsArr.forEach((item) => {
+                    item.children[0].onchange = (e) => {
+                        if (e.target.checked === true) {
+                            setOns((prevOns) => [...prevOns, {
+                                name: item.children[2].children[0].innerText,
+                                price: item.children[3].innerText
+                            }]);
+                        } else {
+                            
+                            setOns((prevOns) => prevOns.filter((onsItem) => {
+                                return onsItem.name !== item.children[2].children[0].innerText;
+                            }));
+                        
+                        
+                    };
+                }
+                
+            });
+        }
         nextBtnRef.current.addEventListener('click', () => {
             if (currentStep < 4) {
                 setCurrentStep(currentStep + 1);
@@ -48,7 +69,9 @@ const MultiStepForm = () => {
             }
         });
     }, [currentStep])
-
+    useEffect(() => {
+        console.log(ons);
+    }, [ons]);
     return (
         <section className={s.multiStepSection}>
             <aside>
@@ -158,14 +181,19 @@ const MultiStepForm = () => {
                             <div className={s.planTypes}>
                                 <label>Mounthly</label>
                                 <div>
-                                    {subscribePlan === 'yearly' ? (
-                                        <input type="radio" name="plan" value="mounthly" onChange={(e) => setSubscribePlan(e.target.value)} />
-
-                                    ) : (
+                                    {subscribePlan === 'mounthly' ? (
                                         <input style={{ backgroundColor: 'white' }} type="radio" name="plan" value="mounthly" onChange={(e) => setSubscribePlan(e.target.value)} />
 
+                                    ) : (
+                                        <input type="radio" name="plan" value="mounthly" onChange={(e) => setSubscribePlan(e.target.value)} />
+
                                     )}
-                                    <input type="radio" name="plan" value="yearly" onChange={(e) => setSubscribePlan(e.target.value)} />
+                                    {subscribePlan === 'yearly' ? (
+
+                                        <input style={{ backgroundColor: 'white' }} type="radio" name="plan" value="yearly" onChange={(e) => setSubscribePlan(e.target.value)} />
+                                    ) : (
+                                        <input type="radio" name="plan" value="yearly" onChange={(e) => setSubscribePlan(e.target.value)} />
+                                    )}
                                 </div>
                                 <label>Yearly</label>
                             </div>
@@ -175,14 +203,10 @@ const MultiStepForm = () => {
                         <div className={s.addOnsForm}>
                             <h2>Pick add-ons</h2>
                             <p>Add-ons help enhance your gaming experience.</p>
-                            <div ref={ons} className={s.ons}>
+                            <div ref={onsDiv} className={s.ons}>
                                 <div className={s.onsItem}>
-                                    
-
-                                    <input type="checkbox" name="" />
+                                    <input type="checkbox" name=""/>
                                     <span className={s.checkmark}></span>
-                                    
-
                                     <div className={s.onsItemText}>
 
                                         <label>Online service</label>
@@ -257,10 +281,10 @@ const MultiStepForm = () => {
                     )}
                     {currentStep === 4 ? (
                         <button type='submit' ref={nextBtnRef} className={s.confirmBtn}>Confirm</button>
-                    ):(
-                        
-                        
-                    <button ref={nextBtnRef} className={s.nextBtn}>Next Step</button>
+                    ) : (
+
+
+                        <button ref={nextBtnRef} className={s.nextBtn}>Next Step</button>
                     )}
                 </div>
             </form>
