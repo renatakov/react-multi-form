@@ -12,6 +12,7 @@ const MultiStepForm = () => {
         type: '',
         price: ''
     })
+
     const [ons, setOns] = useState([])
     const onsDiv = useRef();
     const [userInfo, setUserInfo] = useState();
@@ -26,11 +27,10 @@ const MultiStepForm = () => {
         if (currentStep === 2) {
             let newPlansArr = [...plans.current.children]
             newPlansArr.forEach((item) => {
-
                 item.onclick = () => {
                     setPlanDetails({
                         type: item.children[1].innerText,
-                        price: item.children[2].innerText
+                        price: +item.children[2].attributes[0].value
                     });
                 };
             });
@@ -42,7 +42,7 @@ const MultiStepForm = () => {
                         if (e.target.checked === true) {
                             setOns((prevOns) => [...prevOns, {
                                 name: item.children[2].children[0].innerText,
-                                price: item.children[3].innerText
+                                price: +item.children[3].attributes[0].value
                             }]);
                         } else {
                             
@@ -69,9 +69,15 @@ const MultiStepForm = () => {
             }
         });
     }, [currentStep])
-    useEffect(() => {
-        console.log(ons);
-    }, [ons]);
+    let OnsCollection = ons.map((ons) => {
+        return (
+            <div className={s.summaryItem}>
+            <p>{ons.name}</p>
+            <span>{subscribePlan === "mounthly" ? `+$${ons.price}/mo` : `+$${ons.price}/yr`}</span>
+
+            </div>
+        )
+    })
     return (
         <section className={s.multiStepSection}>
             <aside>
@@ -140,17 +146,17 @@ const MultiStepForm = () => {
                                     <div className={s.plan}>
                                         <img src={arcade} alt="" />
                                         <h4>Arcade</h4>
-                                        <span>9$/mo</span>
+                                        <span value={9}>9$/mo</span>
                                     </div>
                                     <div className={s.plan}>
                                         <img src={advanced} alt="" />
                                         <h4>Advanced</h4>
-                                        <span>12$/mo</span>
+                                        <span value={12}>12$/mo</span>
                                     </div>
                                     <div className={s.plan}>
                                         <img src={pro} alt="" />
                                         <h4>Pro</h4>
-                                        <span>15$/mo</span>
+                                        <span value={15}>15$/mo</span>
                                     </div>
                                 </div>
 
@@ -159,21 +165,21 @@ const MultiStepForm = () => {
                                     <div className={s.plan}>
                                         <img src={arcade} alt="" />
                                         <h4>Arcade</h4>
-                                        <span>90$/yr</span>
+                                        <span value={90}>90$/yr</span>
                                         <span style={{ fontSize: "83%" }}>2 mounths free</span>
 
                                     </div>
                                     <div className={s.plan}>
                                         <img src={advanced} alt="" />
                                         <h4>Advanced</h4>
-                                        <span>120$/yr</span>
+                                        <span value={120}>120$/yr</span>
                                         <span style={{ fontSize: "83%" }}>2 mounths free</span>
 
                                     </div>
                                     <div className={s.plan}>
                                         <img src={pro} alt="" />
                                         <h4>Pro</h4>
-                                        <span>150$/yr</span>
+                                        <span value={150}>150$/yr</span>
                                         <span style={{ fontSize: "83%" }}>2 mounths free</span>
                                     </div>
                                 </div>
@@ -214,9 +220,9 @@ const MultiStepForm = () => {
                                     </div>
                                     {subscribePlan === 'mounthly' ? (
 
-                                        <span>+1$/mo</span>
+                                        <span value={1}>+1$/mo</span>
                                     ) : (
-                                        <span>+10$/yr</span>
+                                        <span value={10}>+10$/yr</span>
 
                                     )}
                                 </div>
@@ -230,10 +236,10 @@ const MultiStepForm = () => {
                                     </div>
                                     {subscribePlan === "mounthly" ? (
 
-                                        <span>+2$/mo</span>
+                                        <span value={2}>+2$/mo</span>
                                     )
                                         : (
-                                            <span>+20$/yr</span>
+                                            <span value={20}>+20$/yr</span>
 
                                         )}
                                 </div>
@@ -248,10 +254,10 @@ const MultiStepForm = () => {
                                     </div>
                                     {subscribePlan === "mounthly" ? (
 
-                                        <span>+2$/mo</span>
+                                        <span value={2}>+2$/mo</span>
                                     )
                                         : (
-                                            <span>+20$/yr</span>
+                                            <span value={20}>+20$/yr</span>
 
                                         )}
                                 </div>
@@ -264,9 +270,21 @@ const MultiStepForm = () => {
                         <div className={s.summary}>
                             <h2>Finishing up</h2>
                             <p>Double-check everything looks OK before confirming.</p>
-                            <div className={s.summaryBlock}>
+                            {ons.length !== 0 && planDetails.length !== 0 ? (
 
+                            <div className={s.summaryBlock}>
+                                <div className={s.summaryItem}>
+
+                                <div className={s.summaryPlanType}>
+                                    <h3>{planDetails.type}{subscribePlan === "mounthly" ? '(Mounthly)' : "(Yearly)"}</h3>
+                                    <a onClick={() => setCurrentStep(2)}>Change</a>
+                                </div>
+                                <span>{subscribePlan === "mounthly" ? `$${planDetails.price}/mo` : `$${planDetails.price}/yr`}</span>
+                                </div>
+                                <hr />
+                                {OnsCollection}
                             </div>
+                            ) : null}
                         </div>
                     ) : null}
                 </div>

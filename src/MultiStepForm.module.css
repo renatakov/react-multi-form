@@ -325,3 +325,30 @@ aside ul li input.currentStep+span {
     color: var(--neutral-magnolia);
     background-color: var(--primary-purplish-blue);
 }
+
+.summaryBlock{
+    display: flex;
+    row-gap: .5rem;
+    flex-direction: column;
+}
+
+.summary > p{
+    margin-bottom: .5rem;
+}
+
+.summaryItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summaryItem:first-child h3,
+.summaryItem:first-child span{
+    color: var(--primary-marine-blue);
+}
+
+
+.summaryItem a {
+    color: var(--neutral-cool-gray);
+    text-decoration: underline;
+}
