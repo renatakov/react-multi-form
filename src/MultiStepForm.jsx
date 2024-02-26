@@ -12,7 +12,7 @@ const MultiStepForm = () => {
         type: '',
         price: ''
     })
-
+    let sum = 0;
     const [ons, setOns] = useState([])
     const onsDiv = useRef();
     const [userInfo, setUserInfo] = useState();
@@ -36,26 +36,28 @@ const MultiStepForm = () => {
             });
         }
         if (currentStep === 3) {
+            console.log(ons);
             let newOnsArr = [...onsDiv.current.children]
             newOnsArr.forEach((item) => {
-                    item.children[0].onchange = (e) => {
-                        if (e.target.checked === true) {
-                            setOns((prevOns) => [...prevOns, {
-                                name: item.children[2].children[0].innerText,
-                                price: +item.children[3].attributes[0].value
-                            }]);
-                        } else {
-                            
-                            setOns((prevOns) => prevOns.filter((onsItem) => {
-                                return onsItem.name !== item.children[2].children[0].innerText;
-                            }));
-                        
-                        
+                item.children[0].onchange = (e) => {
+                    if (e.target.checked === true) {
+                        setOns((prevOns) => [...prevOns, {
+                            name: item.children[2].children[0].innerText,
+                            price: +item.children[3].attributes[0].value
+                        }]);
+                    } else {
+
+                        setOns((prevOns) => prevOns.filter((onsItem) => {
+                            return onsItem.name !== item.children[2].children[0].innerText;
+                        }));
+
+
                     };
                 }
-                
+
             });
         }
+
         nextBtnRef.current.addEventListener('click', () => {
             if (currentStep < 4) {
                 setCurrentStep(currentStep + 1);
@@ -69,11 +71,17 @@ const MultiStepForm = () => {
             }
         });
     }, [currentStep])
+    if (currentStep === 4) {
+        sum = ons.reduce((acc, item) => {
+            return acc + item.price
+        }, planDetails.price)
+    }
+
     let OnsCollection = ons.map((ons) => {
         return (
             <div className={s.summaryItem}>
-            <p>{ons.name}</p>
-            <span>{subscribePlan === "mounthly" ? `+$${ons.price}/mo` : `+$${ons.price}/yr`}</span>
+                <p>{ons.name}</p>
+                <span>{subscribePlan === "mounthly" ? `+$${ons.price}/mo` : `+$${ons.price}/yr`}</span>
 
             </div>
         )
@@ -211,7 +219,7 @@ const MultiStepForm = () => {
                             <p>Add-ons help enhance your gaming experience.</p>
                             <div ref={onsDiv} className={s.ons}>
                                 <div className={s.onsItem}>
-                                    <input type="checkbox" name=""/>
+                                    <input type="checkbox" name="" />
                                     <span className={s.checkmark}></span>
                                     <div className={s.onsItemText}>
 
@@ -272,19 +280,24 @@ const MultiStepForm = () => {
                             <p>Double-check everything looks OK before confirming.</p>
                             {ons.length !== 0 && planDetails.length !== 0 ? (
 
-                            <div className={s.summaryBlock}>
-                                <div className={s.summaryItem}>
+                                <div className={s.summaryBlock}>
+                                    <div className={s.summaryItem}>
 
-                                <div className={s.summaryPlanType}>
-                                    <h3>{planDetails.type}{subscribePlan === "mounthly" ? '(Mounthly)' : "(Yearly)"}</h3>
-                                    <a onClick={() => setCurrentStep(2)}>Change</a>
+                                        <div className={s.summaryPlanType}>
+                                            <h3>{planDetails.type}{subscribePlan === "mounthly" ? '(Mounthly)' : "(Yearly)"}</h3>
+                                            <a onClick={() => setCurrentStep(2)}>Change</a>
+                                        </div>
+                                        <span>{subscribePlan === "mounthly" ? `$${planDetails.price}/mo` : `$${planDetails.price}/yr`}</span>
+                                    </div>
+                                    <hr />
+                                    {OnsCollection}
                                 </div>
-                                <span>{subscribePlan === "mounthly" ? `$${planDetails.price}/mo` : `$${planDetails.price}/yr`}</span>
-                                </div>
-                                <hr />
-                                {OnsCollection}
-                            </div>
                             ) : null}
+                                    <div className={s.totalPrice}>
+
+                                    <p>Total{subscribePlan === "mounthly" ? '(per mounth)' : '(per year'} </p>
+                                    <span>{subscribePlan === "mounthly" ? `+${sum}/mo` : `+${sum}/yr`}</span>
+                                    </div>
                         </div>
                     ) : null}
                 </div>
