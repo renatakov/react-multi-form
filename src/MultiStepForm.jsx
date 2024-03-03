@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 
 const MultiStepForm = () => {
+    const [formStatus, setFormStatus] = useState('ongoing')
     const [currentStep, setCurrentStep] = useState(1);
     const [subscribePlan, setSubscribePlan] = useState('mounthly');
     const [planDetails, setPlanDetails] = useState({
@@ -22,7 +23,15 @@ const MultiStepForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({});
     const formSubmit = (e) => {
         setUserInfo(e)
+        setFormStatus('finished')
     };
+    useEffect(() => {
+        setOns(ons => {
+            return ons.filter((onsItem, index, self) =>
+                index === self.findIndex(o => o.name === onsItem.name)
+            );
+        })
+    }, [ons])
     useEffect(() => {
         if (currentStep === 2) {
             let newPlansArr = [...plans.current.children]
@@ -58,11 +67,12 @@ const MultiStepForm = () => {
             });
         }
 
-        nextBtnRef.current.addEventListener('click', () => {
+        nextBtnRef.current.addEventListener('click', (e) => {
             if (currentStep < 4) {
                 setCurrentStep(currentStep + 1);
 
             }
+            // console.log(e);
         })
         prevBtnRef.current.addEventListener('click', () => {
 
@@ -273,7 +283,7 @@ const MultiStepForm = () => {
                         </div>
                     ) : null}
 
-                    {currentStep === 4 ? (
+                    {currentStep === 4 && formStatus === 'ongoing' ? (
 
                         <div className={s.summary}>
                             <h2>Finishing up</h2>
@@ -293,13 +303,17 @@ const MultiStepForm = () => {
                                     {OnsCollection}
                                 </div>
                             ) : null}
-                                    <div className={s.totalPrice}>
+                            <div className={s.totalPrice}>
 
-                                    <p>Total{subscribePlan === "mounthly" ? '(per mounth)' : '(per year'} </p>
-                                    <span>{subscribePlan === "mounthly" ? `+${sum}/mo` : `+${sum}/yr`}</span>
-                                    </div>
+                                <p>Total{subscribePlan === "mounthly" ? '(per mounth)' : '(per year'} </p>
+                                <span>{subscribePlan === "mounthly" ? `+${sum}/mo` : `+${sum}/yr`}</span>
+                            </div>
                         </div>
                     ) : null}
+                    {/* {formStatus === 'finished' ? (
+                        <div className="finished">r</div>
+
+                    ) : null} */}
                 </div>
 
                 <div className={s.switchStepsButtons}>
