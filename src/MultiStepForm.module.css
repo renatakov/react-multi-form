@@ -37,6 +37,7 @@ body {
 
 .multiStepSection {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     width: 50%;
@@ -92,6 +93,7 @@ aside ul li input.currentStep+span {
 
 
 .stepDivs div {
+
     transition: all 1s;
 }
 

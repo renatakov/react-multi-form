@@ -11,7 +11,7 @@ const MultiStepForm = () => {
     const [subscribePlan, setSubscribePlan] = useState('mounthly');
     const [planDetails, setPlanDetails] = useState({
         type: '',
-        price: ''
+        price: 0
     })
     let sum = 0;
     const [ons, setOns] = useState([])
@@ -23,15 +23,7 @@ const MultiStepForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({});
     const formSubmit = (e) => {
         setUserInfo(e)
-        setFormStatus('finished')
     };
-    useEffect(() => {
-        setOns(ons => {
-            return ons.filter((onsItem, index, self) =>
-                index === self.findIndex(o => o.name === onsItem.name)
-            );
-        })
-    }, [ons])
     useEffect(() => {
         if (currentStep === 2) {
             let newPlansArr = [...plans.current.children]
@@ -59,8 +51,6 @@ const MultiStepForm = () => {
                         setOns((prevOns) => prevOns.filter((onsItem) => {
                             return onsItem.name !== item.children[2].children[0].innerText;
                         }));
-
-
                     };
                 }
 
@@ -72,7 +62,7 @@ const MultiStepForm = () => {
                 setCurrentStep(currentStep + 1);
 
             }
-            // console.log(e);
+            
         })
         prevBtnRef.current.addEventListener('click', () => {
 
@@ -80,8 +70,14 @@ const MultiStepForm = () => {
                 setCurrentStep(currentStep - 1)
             }
         });
-    }, [currentStep])
+        // setOns(ons => {
+        //     return ons.filter((onsItem, index, self) =>
+        //         index === self.findIndex(o => o.name === onsItem.name)
+        //     );
+        // })
+    }, [currentStep, ons])
     if (currentStep === 4) {
+
         sum = ons.reduce((acc, item) => {
             return acc + item.price
         }, planDetails.price)
