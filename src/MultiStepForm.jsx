@@ -46,6 +46,7 @@ const MultiStepForm = () => {
                             name: item.children[2].children[0].innerText,
                             price: +item.children[3].attributes[0].value
                         }]);
+                        
                     } else {
 
                         setOns((prevOns) => prevOns.filter((onsItem) => {
