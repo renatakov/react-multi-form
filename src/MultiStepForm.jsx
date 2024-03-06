@@ -42,19 +42,21 @@ const MultiStepForm = () => {
             newOnsArr.forEach((item) => {
                 item.children[0].onchange = (e) => {
                     if (e.target.checked === true) {
-                        setOns((prevOns) => [...prevOns, {
-                            name: item.children[2].children[0].innerText,
-                            price: +item.children[3].attributes[0].value
-                        }]);
-                        
+                        setOns((prevOns) => [
+                            ...prevOns,
+                            {
+                                name: item.children[2].children[0].innerText,
+                                price: +item.children[3].attributes[0].value
+                            }
+                        ]);
                     } else {
-
-                        setOns((prevOns) => prevOns.filter((onsItem) => {
-                            return onsItem.name !== item.children[2].children[0].innerText;
-                        }));
-                    };
-                }
-
+                        setOns((prevOns) =>
+                            prevOns.filter((onsItem) => {
+                                return onsItem.name !== item.children[2].children[0].innerText;
+                            })
+                        );
+                    }
+                };
             });
         }
 
@@ -63,7 +65,7 @@ const MultiStepForm = () => {
                 setCurrentStep(currentStep + 1);
 
             }
-            
+
         })
         prevBtnRef.current.addEventListener('click', () => {
 
@@ -76,7 +78,11 @@ const MultiStepForm = () => {
         //         index === self.findIndex(o => o.name === onsItem.name)
         //     );
         // })
+
     }, [currentStep, ons])
+    // useEffect(() => {
+
+    // }, [ons])
     if (currentStep === 4) {
 
         sum = ons.reduce((acc, item) => {
@@ -101,25 +107,25 @@ const MultiStepForm = () => {
 
                         <input className={currentStep === 1 ? `${s.currentStep}` : null} required type="radio" name="step" id="step1" onChange={(e) => setCurrentStep(1)} />
                         <span>1</span>
-                        STEP 1
+                        <p>STEP 1</p>
                     </li>
                     <li className="step step2">
                         <input className={currentStep === 2 ? `${s.currentStep}` : null} required type="radio" name="step" id="step2" onChange={(e) => setCurrentStep(2)} />
                         <span>2</span>
 
-                        STEP 2
+                        <p>STEP 2</p>
                     </li>
                     <li className="step step3">
                         <input className={currentStep === 3 ? `${s.currentStep}` : null} required type="radio" name="step" id="step3" onChange={(e) => setCurrentStep(3)} />
                         <span>3</span>
 
-                        STEP 3
+                        <p>STEP 3</p>
                     </li>
                     <li className="step step4">
                         <input className={currentStep === 4 ? `${s.currentStep}` : null} required type="radio" name="step" id="step4" onChange={(e) => setCurrentStep(4)} />
                         <span>4</span>
+                        <p>STEP 4</p>
 
-                        STEP 4
                     </li>
                 </ul>
             </aside>
